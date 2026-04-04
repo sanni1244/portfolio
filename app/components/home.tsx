@@ -9,9 +9,9 @@ interface Project {
   description?: string;
   url?: string;
   githubUrl?: string;
-  demoUrl?: string; // Frontend: Link to Storybook / CodeSandbox
+  demoUrl?: string;    // Frontend: Link to Storybook / CodeSandbox
   articleUrl?: string; // Frontend: Link to Dev.to / Medium / Case Study
-  designUrl?: string; // Frontend: Link to Figma / FigJam
+  designUrl?: string;  // Frontend: Link to Figma / FigJam
   image?: string;
   role?: string;
   tags?: string;
@@ -38,7 +38,11 @@ interface Profile {
   portfolioSubtitle?: string;
 }
 
-const DEFAULT_IMAGES = ["https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&w=600&q=80", "https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=600&q=80", "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=600&q=80"];
+const DEFAULT_IMAGES = [
+  "https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&w=600&q=80",
+  "https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=600&q=80",
+  "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=600&q=80"
+];
 
 export default function Home() {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -85,7 +89,10 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [projectsRes, profileRes] = await Promise.all([fetch("/api/projects"), fetch("/api/profile")]);
+        const [projectsRes, profileRes] = await Promise.all([
+          fetch("/api/projects"),
+          fetch("/api/profile")
+        ]);
 
         if (projectsRes.ok) {
           const data = await projectsRes.json();
@@ -266,10 +273,11 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#050505] text-gray-300 font-sans selection:bg-cyan-500/30 selection:text-cyan-200 pb-24 overflow-x-hidden">
+      
       <header className="flex justify-between items-center p-6 border-b border-gray-800/50 backdrop-blur-md sticky top-0 z-50 bg-[#050505]/80">
         <div className="text-xl md:text-2xl font-black tracking-tighter flex items-center gap-1 select-none text-white">
           <span className="text-cyan-400">&lt;</span>
-          {profile.name?.split(" ")[0] || "Dev"}
+          {profile.name?.split(' ')[0] || "Dev"}
           <span className="text-cyan-400">/&gt;</span>
         </div>
 
@@ -278,19 +286,14 @@ export default function Home() {
             <div className="flex items-center gap-2">
               {showLogin && (
                 <form onSubmit={handleLogin} className="flex">
-                  <input type="password" autoFocus value={passwordInput} onChange={(e) => setPasswordInput(e.target.value)} className="bg-gray-900 border border-gray-800 text-sm px-3 py-1.5 rounded-l-md focus:outline-none focus:border-cyan-500 transition w-32" placeholder="" />
+                  <input type="password" autoFocus value={passwordInput} onChange={(e) => setPasswordInput(e.target.value)} className="bg-gray-900 border border-gray-800 text-sm px-3 py-1.5 rounded-l-md focus:outline-none focus:border-cyan-500 transition w-32" placeholder="password" />
                   <button type="submit" className="bg-gray-800 border-y border-r border-gray-700 text-gray-400 hover:text-cyan-400 px-3 rounded-r-md">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                    </svg>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                   </button>
                 </form>
               )}
               <button onClick={() => setShowLogin(!showLogin)} className="text-gray-600 hover:text-cyan-400 transition cursor-pointer p-2">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                </svg>
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
               </button>
             </div>
           ) : (
@@ -318,21 +321,20 @@ export default function Home() {
                 {profile.title} <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">{profile.subtitle}</span>
               </h1>
-              <p className="text-gray-400 text-base md:text-lg max-w-lg leading-relaxed">{profile.description}</p>
+              <p className="text-gray-400 text-base md:text-lg max-w-lg leading-relaxed">
+                {profile.description}
+              </p>
 
               <div className="pt-4 space-y-6">
                 {profile.skills && (
                   <div>
                     <h4 className="text-xs text-gray-500 uppercase tracking-widest font-bold mb-3">Frontend Stack</h4>
                     <div className="flex flex-wrap gap-2">
-                      {profile.skills.split(",").map(
-                        (skill, i) =>
-                          skill.trim() && (
-                            <span key={i} className="text-xs bg-gray-900 border border-gray-800 text-gray-300 px-3 py-1.5 rounded-full hover:border-cyan-500/50 transition-colors">
-                              {skill.trim()}
-                            </span>
-                          )
-                      )}
+                      {profile.skills.split(",").map((skill, i) => skill.trim() && (
+                        <span key={i} className="text-xs bg-gray-900 border border-gray-800 text-gray-300 px-3 py-1.5 rounded-full hover:border-cyan-500/50 transition-colors">
+                          {skill.trim()}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 )}
@@ -340,14 +342,11 @@ export default function Home() {
                   <div>
                     <h4 className="text-xs text-gray-500 uppercase tracking-widest font-bold mb-3">Tools & Platform</h4>
                     <div className="flex flex-wrap gap-2">
-                      {profile.tools.split(",").map(
-                        (tool, i) =>
-                          tool.trim() && (
-                            <span key={i} className="text-xs bg-blue-900/10 text-blue-400 border border-blue-900/30 px-3 py-1.5 rounded-full">
-                              {tool.trim()}
-                            </span>
-                          )
-                      )}
+                      {profile.tools.split(",").map((tool, i) => tool.trim() && (
+                        <span key={i} className="text-xs bg-blue-900/10 text-blue-400 border border-blue-900/30 px-3 py-1.5 rounded-full">
+                          {tool.trim()}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 )}
@@ -359,20 +358,16 @@ export default function Home() {
                     Get in Touch
                   </a>
                 )}
-
+                
                 <div className="flex items-center gap-4">
                   {profile.github && (
                     <a href={profile.github} target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white transition-colors p-2 bg-gray-900 rounded-full border border-gray-800">
-                      <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-                        <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
-                      </svg>
+                      <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path></svg>
                     </a>
                   )}
                   {profile.linkedin && (
                     <a href={profile.linkedin} target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white transition-colors p-2 bg-gray-900 rounded-full border border-gray-800">
-                      <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path>
-                      </svg>
+                      <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>
                     </a>
                   )}
                   {profile.resumeUrl && (
@@ -395,9 +390,7 @@ export default function Home() {
                   <Image src={profile.portraitImage} alt="Portrait" fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 768px) 100vw, 400px" priority />
                 ) : (
                   <div className="flex flex-col items-center justify-center h-full text-gray-600 space-y-4">
-                    <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                    </svg>
+                    <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                     <span className="text-xs tracking-widest uppercase">Add Portrait in Admin</span>
                   </div>
                 )}
@@ -408,7 +401,9 @@ export default function Home() {
 
         <section className="mb-24">
           <div className="mb-12 flex flex-col items-center text-center">
-            <h2 className="text-cyan-400 text-xs font-bold mb-3 uppercase tracking-widest">{profile.portfolioHeading || "Selected Work"}</h2>
+            <h2 className="text-cyan-400 text-xs font-bold mb-3 uppercase tracking-widest">
+              {profile.portfolioHeading || "Selected Work"}
+            </h2>
             <h3 className="text-4xl md:text-5xl font-black text-white">
               {profile.portfolioTitle || "RECENT"} <span className="text-gray-500 font-light">{profile.portfolioSubtitle || "PROJECTS"}</span>
             </h3>
@@ -426,96 +421,77 @@ export default function Home() {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {Array.isArray(projects) &&
-                projects.map((project) => (
-                  <div key={project.id} className="group relative bg-[#0a0a0a] border border-gray-800 rounded-2xl overflow-hidden hover:border-gray-600 transition-all flex flex-col h-full">
-                    <div className="w-full h-56 relative bg-gray-950 shrink-0 border-b border-gray-800/50 overflow-hidden">
-                      <Image src={project.image || "https://via.placeholder.com/600x400?text=App"} alt={project.title || "Project"} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" />
-                    </div>
-
-                    <div className="p-6 flex-1 flex flex-col">
-                      <div className="flex justify-between items-start mb-2">
-                        <h4 className="text-xl font-bold text-white">{project.title || "Untitled App"}</h4>
-                      </div>
-
-                      <div className="flex items-center gap-2 mb-4">
-                        {project.role && <span className="text-cyan-400 bg-cyan-400/10 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">{project.role}</span>}
-                        {project.date && <span className="text-gray-500 text-[10px] font-mono">{project.date}</span>}
-                      </div>
-
-                      <p className="text-gray-400 text-sm line-clamp-3 mb-6 flex-1">{project.description}</p>
-
-                      <div className="mt-auto border-t border-gray-800 pt-4 flex flex-col gap-4">
-                        <div className="text-[10px] text-gray-500 flex flex-wrap gap-1 font-mono">
-                          {project.tags?.split(",").map((t, i) => (
-                            <span key={i} className="bg-gray-900 px-2 py-0.5 rounded border border-gray-800">
-                              {t.trim()}
-                            </span>
-                          ))}
-                        </div>
-
-                        <div className="flex items-center gap-4">
-                          {project.githubUrl && (
-                            <a href={project.githubUrl} target="_blank" rel="noreferrer" title="Source Code" className="text-gray-400 hover:text-white transition-colors flex items-center gap-1.5 text-xs font-medium">
-                              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
-                              </svg>
-                              Code
-                            </a>
-                          )}
-                          {project.url && (
-                            <a href={project.url} target="_blank" rel="noreferrer" title="Live Site" className="text-gray-400 hover:text-cyan-400 transition-colors flex items-center gap-1.5 text-xs font-medium">
-                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                              </svg>
-                              Live
-                            </a>
-                          )}
-                          {project.demoUrl && (
-                            <a href={project.demoUrl} target="_blank" rel="noreferrer" title="Interactive Demo / Storybook" className="text-gray-400 hover:text-pink-400 transition-colors flex items-center gap-1.5 text-xs font-medium">
-                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                              </svg>
-                              Demo
-                            </a>
-                          )}
-                          {project.designUrl && (
-                            <a href={project.designUrl} target="_blank" rel="noreferrer" title="Figma / Design" className="text-gray-400 hover:text-orange-400 transition-colors flex items-center gap-1.5 text-xs font-medium">
-                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
-                              </svg>
-                              Design
-                            </a>
-                          )}
-                          {project.articleUrl && (
-                            <a href={project.articleUrl} target="_blank" rel="noreferrer" title="Case Study / Article" className="text-gray-400 hover:text-blue-400 transition-colors flex items-center gap-1.5 text-xs font-medium">
-                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
-                              </svg>
-                              Read
-                            </a>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-
-                    {isAdmin && (
-                      <div className="absolute top-4 right-4 flex gap-2 z-20 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button onClick={() => startEditProject(project)} className="bg-white hover:bg-gray-200 text-black p-2 rounded-full shadow-lg transition">
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
-                          </svg>
-                        </button>
-                        <button onClick={() => handleDeleteProject(project.id)} className="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full shadow-lg transition">
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                          </svg>
-                        </button>
-                      </div>
-                    )}
+              {/* THE FIX IS HERE: Filter checks for null or undefined projects before mapping */}
+              {Array.isArray(projects) && projects.filter(p => p != null).map((project) => (
+                <div key={project.id} className="group relative bg-[#0a0a0a] border border-gray-800 rounded-2xl overflow-hidden hover:border-gray-600 transition-all flex flex-col h-full">
+                  <div className="w-full h-56 relative bg-gray-950 shrink-0 border-b border-gray-800/50 overflow-hidden">
+                    <Image src={project.image || "https://via.placeholder.com/600x400?text=App"} alt={project.title || "Project"} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" />
                   </div>
-                ))}
+
+                  <div className="p-6 flex-1 flex flex-col">
+                    <div className="flex justify-between items-start mb-2">
+                      <h4 className="text-xl font-bold text-white">{project.title || "Untitled App"}</h4>
+                    </div>
+
+                    <div className="flex items-center gap-2 mb-4">
+                      {project.role && <span className="text-cyan-400 bg-cyan-400/10 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">{project.role}</span>}
+                      {project.date && <span className="text-gray-500 text-[10px] font-mono">{project.date}</span>}
+                    </div>
+
+                    <p className="text-gray-400 text-sm line-clamp-3 mb-6 flex-1">{project.description}</p>
+
+                    <div className="mt-auto border-t border-gray-800 pt-4 flex flex-col gap-4">
+                      <div className="text-[10px] text-gray-500 flex flex-wrap gap-1 font-mono">
+                        {project.tags?.split(",").map((t, i) => <span key={i} className="bg-gray-900 px-2 py-0.5 rounded border border-gray-800">{t.trim()}</span>)}
+                      </div>
+                      
+                      <div className="flex items-center gap-4">
+                        {project.githubUrl && (
+                          <a href={project.githubUrl} target="_blank" rel="noreferrer" title="Source Code" className="text-gray-400 hover:text-white transition-colors flex items-center gap-1.5 text-xs font-medium">
+                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path></svg>
+                            Code
+                          </a>
+                        )}
+                        {project.url && (
+                          <a href={project.url} target="_blank" rel="noreferrer" title="Live Site" className="text-gray-400 hover:text-cyan-400 transition-colors flex items-center gap-1.5 text-xs font-medium">
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                            Live
+                          </a>
+                        )}
+                        {project.demoUrl && (
+                          <a href={project.demoUrl} target="_blank" rel="noreferrer" title="Interactive Demo / Storybook" className="text-gray-400 hover:text-pink-400 transition-colors flex items-center gap-1.5 text-xs font-medium">
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            Demo
+                          </a>
+                        )}
+                        {project.designUrl && (
+                          <a href={project.designUrl} target="_blank" rel="noreferrer" title="Figma / Design" className="text-gray-400 hover:text-orange-400 transition-colors flex items-center gap-1.5 text-xs font-medium">
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>
+                            Design
+                          </a>
+                        )}
+                        {project.articleUrl && (
+                          <a href={project.articleUrl} target="_blank" rel="noreferrer" title="Case Study / Article" className="text-gray-400 hover:text-blue-400 transition-colors flex items-center gap-1.5 text-xs font-medium">
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
+                            Read
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  {isAdmin && (
+                    <div className="absolute top-4 right-4 flex gap-2 z-20 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <button onClick={() => startEditProject(project)} className="bg-white hover:bg-gray-200 text-black p-2 rounded-full shadow-lg transition">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                      </button>
+                      <button onClick={() => handleDeleteProject(project.id)} className="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full shadow-lg transition">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                      </button>
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
           )}
         </section>
