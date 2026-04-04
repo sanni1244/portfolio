@@ -10,8 +10,7 @@ async function getDb() {
 export async function GET() {
   try {
     const db = await getDb();
-    // Switched to 'fs_profile' table to avoid collision with the previous one
-    const profile = await db.collection('fs_profile').findOne({ _id: "main_profile" as any });
+    const profile = await db.collection('fe_profile').findOne({ _id: "main_profile" as any });
     
     if (!profile) {
       return NextResponse.json({});
@@ -28,7 +27,7 @@ export async function POST(request: Request) {
     const profileData = await request.json();
     const db = await getDb();
     
-    await db.collection('fs_profile').updateOne(
+    await db.collection('fe_profile').updateOne(
       { _id: "main_profile" as any },
       { $set: profileData },
       { upsert: true }
